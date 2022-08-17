@@ -32,16 +32,16 @@ function connectOneTimeToDatabase() {
 // Connect to PostgreSQL
 const sql = connectOneTimeToDatabase();
 
-export type Animal = {
+export type Johanna = {
   id: number;
-  firstName: string;
-  type: string;
-  accessory: string;
+  title: string;
+  client: string;
+  date: string;
 };
 
-export async function getCases() {
-  const animals = await sql<Animal[]>`
-    SELECT * FROM animals
+export async function getJohannaHobel() {
+  const johannaInfos = await sql<Johanna[]>`
+    SELECT * FROM johannaHobel
   `;
-  return animals.map((animal) => camelcaseKeys(animal));
+  return johannaInfos.map((johannaInfo) => camelcaseKeys(johannaInfo));
 }

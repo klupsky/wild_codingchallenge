@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Tungsten-Bold';
+  src: local('Tungsten-Bold'),
+    url('../public/fonts/Tungsten-Bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Tungsten-Semibold';
+  src: local('Tungsten-Semibold'),
+    url('../public/fonts/Tungsten-Semibold.woff') format('woff');
+}
