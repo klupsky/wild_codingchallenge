@@ -43,7 +43,7 @@ const carouselStyle = css`
   .left-arrow,
   .right-arrow {
     position: absolute;
-    z-index: 13;
+    z-index: 15;
     top: 42%;
     transform: translateY(-50%);
     width: 48px;
@@ -75,18 +75,20 @@ const carouselStyle = css`
 export default function ImageCarousel(props) {
   const { children } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState(5);
+  const [length, setLength] = useState(children.length);
+
+  const [prevIndex, setPrevIndex] = useState(children.length);
   const [nextIndex, setNextIndex] = useState(2);
 
-  const [length, setLength] = useState(children.length);
   const next = () => {
-    setNextIndex((prevState) => prevState + 1);
     if (currentIndex < length - 1) {
+      setNextIndex((prevState) => prevState + 1);
+
       setCurrentIndex((prevState) => prevState + 1);
     }
   };
   const prev = () => {
-    setPrevIndex((prevState) => prevState - 1);
+    setPrevIndex((prevState) => prevState - 2);
     if (currentIndex > 0) {
       setCurrentIndex((prevState) => prevState - 1);
     }
@@ -103,7 +105,7 @@ export default function ImageCarousel(props) {
           {currentIndex > 0 && (
             <button onClick={prev} className="left-arrow">
               <Image
-                src={`/../public/images/image0${prevIndex}.jpg`}
+                src={`/../public/images/image0${currentIndex}.jpg`}
                 width="30px"
                 height="30px"
                 alt="prev"
@@ -117,13 +119,14 @@ export default function ImageCarousel(props) {
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
               >
                 {children}
+                {console.log(currentIndex + 1)}
               </div>
             </div>
           </div>
           {currentIndex < length - 1 ? (
             <button onClick={next} className="right-arrow">
               <Image
-                src={`/../public/images/image0${nextIndex}.jpg`}
+                src={`/../public/images/image0${currentIndex + 2}.jpg`}
                 width="30px"
                 height="30px"
                 alt="next"
