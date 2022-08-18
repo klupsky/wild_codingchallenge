@@ -46,6 +46,11 @@ const containerStyle = css`
     grid-column: 2 / 2;
     grid-row: 1;
     z-index: 3;
+  }
+  .item4 {
+    grid-column: 2 / 2;
+    grid-row: 1;
+    z-index: 10;
 
   }
 
@@ -127,8 +132,18 @@ left: -22.3%;
    width: 900px;
 
   }
+`;
 
+const naviContainerStyle = css`
+  font-family: 'Helvetica';
+  font-size: 0.45rem;
+  letter-spacing: 0.04rem;
+  height: 680px;
 
+  .navigationInfos {
+    position: relative;
+    top: 75.5%;
+  }
 `;
 
 const dataBox = css`
@@ -208,6 +223,14 @@ export default function Home(props) {
                     </div>
                   </div>
                 </div>
+                <div className="item4">
+                  <div css={naviContainerStyle}>
+                    <div className="navigationInfos">
+                      {preview.id} OF {props.johannaInfos.length}
+                    </div>
+                  </div>
+                </div>
+
                 <div css={dataBox}>
                   <div css={infoStyle}>
                     <div>
