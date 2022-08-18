@@ -3,6 +3,11 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const carouselStyle = css`
+  padding: 0.7rem;
+  align-content: center;
+  align-self: center;
+  text-align: center;
+
   .carousel-container {
     width: 100%;
     display: flex;
@@ -44,32 +49,32 @@ const carouselStyle = css`
   .right-arrow {
     position: absolute;
     z-index: 15;
-    top: 42%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
-    background-color: transparent;
+    width: 250px;
+    height: 330px;
+    border-radius: 11px;
     border: 1px solid black;
-    padding-top: 0.5%;
+    background-color: black;
+    padding: 0;
   }
 
   .left-arrow {
-    left: 22px;
-
-    // when smaller than 700
-    @media (max-width: 700px) {
-      left: 0px;
-    }
+    left: 0;
+    bottom: 1.4rem;
   }
 
   .right-arrow {
-    right: 24px;
-    // when smaller than 700
-    @media (max-width: 700px) {
-      right: 0px;
-    }
+    right: 0;
   }
+`;
+
+const backgroundStyle = css`
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  height: 130%;
+  width: 130%;
+  filter: blur(70px);
+  z-index: 0;
 `;
 
 export default function ImageCarousel(props) {
@@ -77,18 +82,13 @@ export default function ImageCarousel(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
 
-  const [prevIndex, setPrevIndex] = useState(children.length);
-  const [nextIndex, setNextIndex] = useState(2);
-
   const next = () => {
     if (currentIndex < length - 1) {
-      setNextIndex((prevState) => prevState + 1);
-
       setCurrentIndex((prevState) => prevState + 1);
     }
   };
+
   const prev = () => {
-    setPrevIndex((prevState) => prevState - 2);
     if (currentIndex > 0) {
       setCurrentIndex((prevState) => prevState - 1);
     }
@@ -100,48 +100,86 @@ export default function ImageCarousel(props) {
 
   return (
     <div css={carouselStyle}>
+      {console.log(props.johannaInfos[1])}
+      <div css={backgroundStyle}>
+        <Image
+          src={`/../public/images/image0${currentIndex + 1}.jpg`}
+          alt="background"
+          objectFit="fill"
+          layout="fill"
+          quality={100}
+          width={100}
+          height={100}
+        />
+      </div>
       <div className="carousel-container">
         <div className="carousel-wrapper">
-          {currentIndex > 0 && (
+          {currentIndex > 0 ? (
             <button onClick={prev} className="left-arrow">
               <Image
                 src={`/../public/images/image0${currentIndex}.jpg`}
-                width="30px"
-                height="30px"
+                width="250px"
+                height="330px"
                 alt="prev"
+                css={css`
+                  border-radius: 10px;
+                  z-index: 1;
+                `}
+              />
+            </button>
+          ) : (
+            <button
+              onClick={() => setCurrentIndex(children.length - 1)}
+              className="left-arrow"
+            >
+              <Image
+                src={`/../public/images/image0${children.length}.jpg`}
+                width="250px"
+                height="330px"
+                alt="prev"
+                css={css`
+                  border-radius: 10px;
+                  z-index: 1;
+                `}
               />
             </button>
           )}
-          <div className="carousel-content-wrapper">
-            <div className="carousel-content">
-              <div
-                className="carousel-content"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-              >
-                {children}
-                {console.log(currentIndex + 1)}
-              </div>
+          <div className="carousel-content">
+            <div
+              className="carousel-content"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {children}
             </div>
           </div>
           {currentIndex < length - 1 ? (
             <button onClick={next} className="right-arrow">
               <Image
                 src={`/../public/images/image0${currentIndex + 2}.jpg`}
-                width="30px"
-                height="30px"
+                width="250px"
+                height="330px"
                 alt="next"
+                css={css`
+                  border-radius: 10px;
+                  z-index: 1;
+                `}
               />
             </button>
           ) : (
-            <button onClick={next} className="right-arrow">
+            <button onClick={() => setCurrentIndex(0)} className="right-arrow">
               <Image
                 src={`/../public/images/image01.jpg`}
-                width="30px"
-                height="30px"
+                width="250px"
+                height="330px"
                 alt="next"
+                css={css`
+                  border-radius: 10px;
+                  z-index: 1;
+                `}
               />
             </button>
           )}
+          <div></div>
         </div>
       </div>
     </div>
