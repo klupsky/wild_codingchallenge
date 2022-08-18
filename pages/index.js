@@ -22,13 +22,12 @@ const titleStyle = css`
 `;
 
 const containerStyle = css`
-
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100vw;
   height: 100vh;
   align-content: center;
-  align-self: center
+  align-self: center;
   text-align: center;
   gap: 15%;
 
@@ -51,9 +50,7 @@ const containerStyle = css`
     grid-column: 2 / 2;
     grid-row: 1;
     z-index: 10;
-
   }
-
 `;
 
 const picContainerStyle = css`
@@ -69,68 +66,57 @@ const picContainerStyle = css`
 `;
 
 const outlineTitleContainerStyle = css`
-
-display:flex;
-width: 510px;
+  display: flex;
+  width: 510px;
   height: 680px;
   color: white;
   align-content: center;
-  align-self: center
+  align-self: center;
   text-align: center;
-
-
-
 
   .titleContainerTextStyle {
     width: 900px;
   }
 
-
   .backgroundTextStyle {
     position: relative;
-top: 24.3%;
-left: -22.3%;
+    top: 24.3%;
+    left: -22.3%;
     font-size: 11rem;
     letter-spacing: 0.65rem;
     line-height: 80%;
     text-align: center;
     height: 680px;
-   width: 900px;
-   color: transparent;
-   -webkit-text-stroke-width: 1px;
+    width: 900px;
+    color: transparent;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: white;
-
   }
 `;
 
 const titleContainerStyle = css`
-display:flex;
-width: 510px;
+  display: flex;
+  width: 510px;
   height: 680px;
   color: white;
   align-content: center;
-  align-self: center
+  align-self: center;
   text-align: center;
   overflow: hidden;
 
-
-
-
   .titleContainerTextStyle {
     width: 900px;
-
   }
   .breakTextStyle {
     position: relative;
-top: 24.3%;
-left: -22.3%;
+    top: 24.3%;
+    left: -22.3%;
     font-size: 11rem;
     letter-spacing: 0.65rem;
     line-height: 80%;
     text-align: center;
     height: 680px;
-   width: 900px;
-
+    width: 900px;
   }
 `;
 
@@ -197,7 +183,7 @@ export default function Home(props) {
                 <div className="item1">
                   <div css={picContainerStyle}>
                     <Image
-                      src={image[`${preview.id}`]}
+                      src={image`[${preview.id}]`}
                       alt={preview.title}
                       width={508}
                       height={678}

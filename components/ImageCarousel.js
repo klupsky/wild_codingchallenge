@@ -168,7 +168,7 @@ export default function ImageCarousel(props) {
           ) : (
             <button onClick={() => setCurrentIndex(0)} className="right-arrow">
               <Image
-                src={`/../public/images/image01.jpg`}
+                src="/../public/images/image01.jpg"
                 width="250px"
                 height="330px"
                 alt="next"
@@ -179,7 +179,6 @@ export default function ImageCarousel(props) {
               />
             </button>
           )}
-          <div></div>
         </div>
       </div>
     </div>
