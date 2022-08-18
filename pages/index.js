@@ -183,7 +183,7 @@ export default function Home(props) {
                 <div className="item1">
                   <div css={picContainerStyle}>
                     <Image
-                      src={image[`${preview.id}`]}
+                      src={`/../public/images/image0${preview.id}.jpg`}
                       alt={preview.title}
                       width={508}
                       height={678}
