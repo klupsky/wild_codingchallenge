@@ -81,7 +81,6 @@ export default function ImageCarousel(props) {
   const { children } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
-
   const next = () => {
     if (currentIndex < length - 1) {
       setCurrentIndex((prevState) => prevState + 1);
@@ -120,8 +119,14 @@ export default function ImageCarousel(props) {
       <div className="carousel-container">
         <div className="carousel-wrapper">
           {currentIndex > 0 ? (
-            <button onClick={prev} className="left-arrow">
+            <button
+              onClick={() => {
+                props.setActiveIndex(currentIndex);
+              }}
+              className="left-arrow"
+            >
               <Image
+                onClick={prev}
                 src={`/image0${currentIndex}.jpg`}
                 width="250px"
                 height="330px"
@@ -134,7 +139,10 @@ export default function ImageCarousel(props) {
             </button>
           ) : (
             <button
-              onClick={() => setCurrentIndex(children.length - 1)}
+              onClick={() => {
+                props.setActiveIndex(0);
+                setCurrentIndex(children.length - 1);
+              }}
               className="left-arrow"
             >
               <Image
@@ -158,8 +166,14 @@ export default function ImageCarousel(props) {
             </div>
           </div>
           {currentIndex < length - 1 ? (
-            <button onClick={next} className="right-arrow">
+            <button
+              onClick={() => {
+                props.setActiveIndex(currentIndex + 1);
+              }}
+              className="right-arrow"
+            >
               <Image
+                onClick={next}
                 src={`/image0${currentIndex + 2}.jpg`}
                 width="250px"
                 height="330px"
@@ -171,7 +185,13 @@ export default function ImageCarousel(props) {
               />
             </button>
           ) : (
-            <button onClick={() => setCurrentIndex(0)} className="right-arrow">
+            <button
+              onClick={() => {
+                props.setActiveIndex(0);
+                setCurrentIndex(0);
+              }}
+              className="right-arrow"
+            >
               <Image
                 src="/image01.jpg"
                 width="250px"

@@ -195,12 +195,9 @@ const fullScreen = css`
 export default function Home(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [imageNumber, setImageNumber] = useState('');
-  const [activeIndex, setActiveIndex] = useState(1);
-
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
   };
-
   return (
     <div>
       <div css={titleStyle}>Xyz photography</div>
@@ -218,7 +215,11 @@ export default function Home(props) {
         </div>
       )}
 
-      <ImageCarousel johannaInfos={props.johannaInfos}>
+      <ImageCarousel
+        activeIndex={props.activeIndex}
+        setActiveIndex={props.setActiveIndex}
+        johannaInfos={props.johannaInfos}
+      >
         {props.johannaInfos.map((preview) => {
           return (
             <div key={`id-${preview.id}`}>
@@ -258,9 +259,8 @@ export default function Home(props) {
                       {preview.id} OF {props.johannaInfos.length}
                       <span>
                         <Dots
-                          changeIndex={setActiveIndex}
                           johannaInfos={props.johannaInfos}
-                          activeIndex={activeIndex}
+                          activeIndex={props.activeIndex}
                         />
                       </span>
                     </div>

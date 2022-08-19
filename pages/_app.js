@@ -1,7 +1,10 @@
 import './index.css';
 import { css, Global } from '@emotion/react';
+import { useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <>
       <Global
@@ -32,7 +35,11 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-      <Component {...pageProps} />
+      <Component
+        {...pageProps}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+      />
     </>
   );
 }
