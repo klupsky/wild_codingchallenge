@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useState } from 'react';
+// import Rect from '../components/Rect';
+import Dots from '../components/Dots';
 import ImageCarousel from '../components/ImageCarousel';
-import Rect from '../components/Rect';
 import { getJohannaHobel } from '../util/database';
 
 const titleStyle = css`
@@ -194,16 +195,10 @@ const fullScreen = css`
 export default function Home(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [imageNumber, setImageNumber] = useState('');
+  const [activeIndex, setActiveIndex] = useState(1);
 
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
-  };
-
-  const activeStyle = {
-    fill: 'white',
-  };
-  const deactiveStyle = {
-    fill: 'none',
   };
 
   return (
@@ -262,9 +257,11 @@ export default function Home(props) {
                     <div className="navigationInfos">
                       {preview.id} OF {props.johannaInfos.length}
                       <span>
-                        {props.johannaInfos.map(() => (
-                          <Rect key={`id-${preview.id}`} />
-                        ))}
+                        <Dots
+                          changeIndex={setActiveIndex}
+                          johannaInfos={props.johannaInfos}
+                          activeIndex={activeIndex}
+                        />
                       </span>
                     </div>
                   </div>
