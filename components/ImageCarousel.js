@@ -100,10 +100,15 @@ export default function ImageCarousel(props) {
 
   return (
     <div css={carouselStyle}>
-      {console.log(props.johannaInfos[1])}
+      {/* <div>
+        {' '}
+        {props.johannaInfos.map((preview) => {
+          return <div key={`id-${preview.id}`}>{preview.id}</div>;
+        })}
+      </div> */}
       <div css={backgroundStyle}>
         <Image
-          src={`/../public/images/image0${currentIndex + 1}.jpg`}
+          src={`/image0${currentIndex + 1}.jpg`}
           alt="background"
           objectFit="fill"
           layout="fill"

@@ -1,16 +1,9 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import { useState } from 'react';
 import ImageCarousel from '../components/ImageCarousel';
+import Rect from '../components/Rect';
 import { getJohannaHobel } from '../util/database';
-
-export const image = [
-  '',
-  '/../public/images/image01.jpg',
-  '/../public/images/image02.jpg',
-  '/../public/images/image03.jpg',
-  '/../public/images/image04.jpg',
-  '/../public/images/image05.jpg',
-];
 
 const titleStyle = css`
   position: absolute;
@@ -44,7 +37,7 @@ const containerStyle = css`
   .item3 {
     grid-column: 2 / 2;
     grid-row: 1;
-    z-index: 3;
+    z-index: 0;
   }
   .item4 {
     grid-column: 2 / 2;
@@ -81,9 +74,9 @@ const outlineTitleContainerStyle = css`
   .backgroundTextStyle {
     position: relative;
     top: 24.3%;
-    left: -22.3%;
+    left: -21.15%;
     font-size: 11rem;
-    letter-spacing: 0.65rem;
+    letter-spacing: 0.45rem;
     line-height: 80%;
     text-align: center;
     height: 680px;
@@ -110,9 +103,9 @@ const titleContainerStyle = css`
   .breakTextStyle {
     position: relative;
     top: 24.3%;
-    left: -22.3%;
+    left: -21.15%;
     font-size: 11rem;
-    letter-spacing: 0.65rem;
+    letter-spacing: 0.45rem;
     line-height: 80%;
     text-align: center;
     height: 680px;
@@ -122,13 +115,20 @@ const titleContainerStyle = css`
 
 const naviContainerStyle = css`
   font-family: 'Helvetica';
-  font-size: 0.45rem;
+  font-size: 0.5rem;
   letter-spacing: 0.04rem;
   height: 680px;
 
   .navigationInfos {
     position: relative;
     top: 75.5%;
+    left: -25px;
+
+    span {
+      position: relative;
+      top: 0.04rem;
+      left: 25px;
+    }
   }
 `;
 
@@ -151,6 +151,24 @@ const infoStyle = css`
   width: 110px;
   height: auto;
   text-align: left;
+  button {
+    color: #202020;
+    background-color: white;
+    border-radius: 50px;
+    border: none;
+    height: 28px;
+    width: 110px;
+    text-align: center;
+    padding: 8%;
+    font-weight: bold;
+    box-shadow: 0px 0px 0px transparent;
+    text-shadow: 0px 0px 0px transparent;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.5rem;
+    letter-spacing: 0.04rem;
+  }
 `;
 
 const infoDateStyle = css`
@@ -158,22 +176,32 @@ const infoDateStyle = css`
   margin-top: 1rem;
   margin-bottom: 1rem;
 `;
-const buttonLinkStyle = css`
-  color: #202020;
-  background-color: white;
-  border-radius: 50px;
-  border: none;
-  height: 28px;
-  width: 110px;
-  text-align: center;
-  padding: 8%;
-  font-weight: bold;
-`;
 
 export default function Home(props) {
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const handleToggle = () => {
+    setNavbarOpen(!navbarOpen);
+    console.log('hello');
+  };
+  // function to close nav bar onClick of links
+  function closeMenu() {
+    setNavbarOpen(false);
+    console.log('is this onclick doing anything?');
+  }
+
+  const activeStyle = {
+    fill: 'white',
+  };
+  const deactiveStyle = {
+    fill: 'none',
+  };
+
   return (
     <div>
-      <div css={titleStyle}>Xyz photography</div>
+      {navbarOpen ? <div>open</div> : <div>close</div>}
+      <div css={titleStyle}>
+        Xyz photography <button onClick={handleToggle}>open full</button>
+      </div>
 
       <ImageCarousel johannaInfos={props.johannaInfos}>
         {props.johannaInfos.map((preview) => {
@@ -189,7 +217,7 @@ export default function Home(props) {
                       height={678}
                       css={css`
                         border-radius: 10px;
-                        z-index: 1;
+                        z-index: 3;
                       `}
                     />
                   </div>
@@ -213,6 +241,11 @@ export default function Home(props) {
                   <div css={naviContainerStyle}>
                     <div className="navigationInfos">
                       {preview.id} OF {props.johannaInfos.length}
+                      <span>
+                        {props.johannaInfos.map(() => (
+                          <Rect key={`id-${preview.id}`} />
+                        ))}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -224,7 +257,7 @@ export default function Home(props) {
                       <br />
                       for {preview.client}
                       <div css={infoDateStyle}>{preview.date}</div>
-                      <div css={buttonLinkStyle}>have a look</div>
+                      <button onClick={handleToggle}>have a look</button>
                     </div>
                   </div>
                 </div>
