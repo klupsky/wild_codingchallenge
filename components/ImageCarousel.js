@@ -117,7 +117,7 @@ export default function ImageCarousel(props) {
           {currentIndex > 0 ? (
             <button onClick={prev} className="left-arrow">
               <Image
-                src={`/../public/images/image0${currentIndex}.jpg`}
+                src={`/image0${currentIndex}.jpg`}
                 width="250px"
                 height="330px"
                 alt="prev"
@@ -133,7 +133,7 @@ export default function ImageCarousel(props) {
               className="left-arrow"
             >
               <Image
-                src={`/../public/images/image0${children.length}.jpg`}
+                src={`/image0${children.length}.jpg`}
                 width="250px"
                 height="330px"
                 alt="prev"
@@ -155,7 +155,7 @@ export default function ImageCarousel(props) {
           {currentIndex < length - 1 ? (
             <button onClick={next} className="right-arrow">
               <Image
-                src={`/../public/images/image0${currentIndex + 2}.jpg`}
+                src={`/image0${currentIndex + 2}.jpg`}
                 width="250px"
                 height="330px"
                 alt="next"
@@ -168,7 +168,7 @@ export default function ImageCarousel(props) {
           ) : (
             <button onClick={() => setCurrentIndex(0)} className="right-arrow">
               <Image
-                src="/../public/images/image01.jpg"
+                src="/image01.jpg"
                 width="250px"
                 height="330px"
                 alt="next"
