@@ -177,17 +177,27 @@ const infoDateStyle = css`
   margin-bottom: 1rem;
 `;
 
+const fullScreen = css`
+  display: grid;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  align-content: center;
+  align-self: center;
+  text-align: center;
+  z-index: 100;
+  background-color: hsla(0, 100%, 0%, 0.8);
+  opacity: 0.7;
+  padding: 10%;
+`;
+
 export default function Home(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [imageNumber, setImageNumber] = useState('');
+
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
-    console.log('hello');
   };
-  // function to close nav bar onClick of links
-  function closeMenu() {
-    setNavbarOpen(false);
-    console.log('is this onclick doing anything?');
-  }
 
   const activeStyle = {
     fill: 'white',
@@ -198,10 +208,20 @@ export default function Home(props) {
 
   return (
     <div>
-      {navbarOpen ? <div>open</div> : <div>close</div>}
-      <div css={titleStyle}>
-        Xyz photography <button onClick={handleToggle}>open full</button>
-      </div>
+      <div css={titleStyle}>Xyz photography</div>
+      {navbarOpen && (
+        <div css={fullScreen}>
+          <div className="fullscreenBoxStyle">
+            <Image
+              onClick={handleToggle}
+              src={`/image0${imageNumber}.jpg`}
+              alt="full screen view"
+              width="512px"
+              height="680"
+            />
+          </div>
+        </div>
+      )}
 
       <ImageCarousel johannaInfos={props.johannaInfos}>
         {props.johannaInfos.map((preview) => {
@@ -257,7 +277,14 @@ export default function Home(props) {
                       <br />
                       for {preview.client}
                       <div css={infoDateStyle}>{preview.date}</div>
-                      <button onClick={handleToggle}>have a look</button>
+                      <button
+                        onClick={() => {
+                          handleToggle();
+                          setImageNumber(preview.id);
+                        }}
+                      >
+                        have a look
+                      </button>
                     </div>
                   </div>
                 </div>
