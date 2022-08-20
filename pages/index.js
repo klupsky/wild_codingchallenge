@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
+import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
-// import Rect from '../components/Rect';
+import { useContext, useState } from 'react';
 import Dots from '../components/Dots';
 import ImageCarousel from '../components/ImageCarousel';
 import { getJohannaHobel } from '../util/database';
+import { MouseContext } from './context/mouse-context';
 
 const titleStyle = css`
   position: absolute;
@@ -188,22 +189,37 @@ const fullScreen = css`
   text-align: center;
   z-index: 100;
   background-color: hsla(0, 100%, 0%, 0.8);
-  opacity: 0.7;
   padding: 10%;
 `;
 
 export default function Home(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [imageNumber, setImageNumber] = useState('');
+  const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
   };
   return (
     <div>
-      <div css={titleStyle}>Xyz photography</div>
+      <Head>
+        <title>xyz photography</title>
+        <meta
+          name="description"
+          content="hypothetical homepage for a Styling and Photography collective"
+        />
+      </Head>
+      <div className="container">
+        <div
+          onMouseEnter={() => cursorChangeHandler('hovered')}
+          onMouseLeave={() => cursorChangeHandler('')}
+        >
+          <div css={titleStyle}>Xyz photography</div>{' '}
+        </div>
+      </div>
+
       {navbarOpen && (
         <div css={fullScreen}>
-          <div className="fullscreenBoxStyle">
+          <div>
             <Image
               onClick={handleToggle}
               src={`/image0${imageNumber}.jpg`}

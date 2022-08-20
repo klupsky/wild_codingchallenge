@@ -1,15 +1,14 @@
 import './index.css';
 import { css, Global } from '@emotion/react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import DotRing from '../components/DotRing';
-import { MouseContext } from './context/mouse-context';
+import MouseContextProvider from './context/mouse-context';
 
 function MyApp({ Component, pageProps }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const { cursorType, cursorChangeHandler } = useContext(MouseContext);
 
   return (
-    <>
+    <MouseContextProvider>
       <Global
         styles={css`
           html,
@@ -41,17 +40,6 @@ function MyApp({ Component, pageProps }) {
             padding: 0;
             cursor: none;
           }
-          /* .cursor {
-            width: 40px;
-            height: 40px;
-            border: 1px solid white;
-            border-radius: 100%;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: soft-light;
-          } */
 
           .ring {
             position: fixed;
@@ -86,8 +74,8 @@ function MyApp({ Component, pageProps }) {
           }
 
           .ring.hovered {
-            width: 50px;
-            height: 50px;
+            width: 80px;
+            height: 80px;
             border: 1px solid white;
           }
 
@@ -97,17 +85,13 @@ function MyApp({ Component, pageProps }) {
         `}
       />
       <DotRing />
-      <div
-        onMouseEnter={() => cursorChangeHandler('hovered')}
-        onMouseLeave={() => cursorChangeHandler('')}
-      >
-        <Component
-          {...pageProps}
-          activeIndex={activeIndex}
-          setActiveIndex={setActiveIndex}
-        />
-      </div>
-    </>
+
+      <Component
+        {...pageProps}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+      />
+    </MouseContextProvider>
   );
 }
 
