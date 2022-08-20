@@ -2,7 +2,7 @@ const Dot = ({ active }) => (
   <span>
     {active ? (
       <svg
-        width="10"
+        width="13"
         height="9"
         viewBox="0 0 5 9"
         fill="white"
@@ -12,7 +12,7 @@ const Dot = ({ active }) => (
           x="0.5"
           y="0.5"
           width="4"
-          height="8"
+          height="7"
           rx="2"
           fill="white"
           stroke="white"
@@ -20,7 +20,7 @@ const Dot = ({ active }) => (
       </svg>
     ) : (
       <svg
-        width="10"
+        width="13"
         height="9"
         viewBox="0 0 5 9"
         fill="none"
@@ -30,7 +30,7 @@ const Dot = ({ active }) => (
           x="0.5"
           y="0.5"
           width="4"
-          height="8"
+          height="7"
           rx="2"
           fill="none"
           stroke="white"

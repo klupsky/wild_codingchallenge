@@ -123,12 +123,12 @@ const naviContainerStyle = css`
   .navigationInfos {
     position: relative;
     top: 75.5%;
-    left: -25px;
+    left: -7px;
 
     span {
       position: relative;
       top: 0.04rem;
-      left: 25px;
+      left: 9px;
     }
   }
 `;

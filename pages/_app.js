@@ -1,10 +1,12 @@
 import './index.css';
 import { css, Global } from '@emotion/react';
-import { useState } from 'react';
-import Cursor from '../components/Cursor';
+import { useContext, useState } from 'react';
+import DotRing from '../components/DotRing';
+import { MouseContext } from './context/mouse-context';
 
 function MyApp({ Component, pageProps }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { cursorType, cursorChangeHandler } = useContext(MouseContext);
 
   return (
     <>
@@ -39,7 +41,7 @@ function MyApp({ Component, pageProps }) {
             padding: 0;
             cursor: none;
           }
-          .cursor {
+          /* .cursor {
             width: 40px;
             height: 40px;
             border: 1px solid white;
@@ -49,15 +51,62 @@ function MyApp({ Component, pageProps }) {
             pointer-events: none;
             z-index: 9999;
             mix-blend-mode: soft-light;
+          } */
+
+          .ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border: 1px solid white;
+            border-radius: 100%;
+            transform: translate(-50%, -50%);
+            /* -webkit-transition-duration: 100ms;
+            transition-duration: 100ms; */
+            /* -webkit-transition-timing-function: ease-out; */
+            /* transition-timing-function: ease-out; */
+            will-change: width, height, transform, border;
+            z-index: 999;
+            pointer-events: none;
+            mix-blend-mode: soft-light;
+          }
+
+          .dot {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background-color: white;
+            border-radius: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+            pointer-events: none;
+          }
+
+          .ring.hovered {
+            width: 50px;
+            height: 50px;
+            border: 1px solid white;
+          }
+
+          .dot.hovered {
+            display: none;
           }
         `}
-      />{' '}
-      <Cursor />
-      <Component
-        {...pageProps}
-        activeIndex={activeIndex}
-        setActiveIndex={setActiveIndex}
-      />{' '}
+      />
+      <DotRing />
+      <div
+        onMouseEnter={() => cursorChangeHandler('hovered')}
+        onMouseLeave={() => cursorChangeHandler('')}
+      >
+        <Component
+          {...pageProps}
+          activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
+        />
+      </div>
     </>
   );
 }
