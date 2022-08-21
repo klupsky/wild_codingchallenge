@@ -193,12 +193,12 @@ const fullScreen = css`
 `;
 
 export default function Home(props) {
-  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [fullsizeOn, setFullsizeOn] = useState(false);
   const [imageNumber, setImageNumber] = useState('');
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   console.log(cursorType);
   const handleToggle = () => {
-    setNavbarOpen(!navbarOpen);
+    setFullsizeOn(!fullsizeOn);
   };
   return (
     <div>
@@ -213,7 +213,7 @@ export default function Home(props) {
         <div css={titleStyle}>Xyz photography</div>{' '}
       </div>
 
-      {navbarOpen && (
+      {fullsizeOn && (
         <div css={fullScreen}>
           <div>
             <Image
