@@ -50,10 +50,7 @@ function MyApp({ Component, pageProps }) {
             border: 1px solid white;
             border-radius: 100%;
             transform: translate(-50%, -50%);
-            /* -webkit-transition-duration: 100ms;
-            transition-duration: 100ms; */
-            /* -webkit-transition-timing-function: ease-out; */
-            /* transition-timing-function: ease-out; */
+
             will-change: width, height, transform, border;
             z-index: 999;
             pointer-events: none;
@@ -74,9 +71,14 @@ function MyApp({ Component, pageProps }) {
           }
 
           .ring.hovered {
-            width: 80px;
-            height: 80px;
+            width: 55px;
+            height: 55px;
             border: 1px solid white;
+            -webkit-transition-duration: 120ms;
+            transition-duration: 120ms;
+            -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+            mix-blend-mode: hard-light;
           }
 
           .dot.hovered {

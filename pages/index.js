@@ -196,6 +196,7 @@ export default function Home(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [imageNumber, setImageNumber] = useState('');
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
+  console.log(cursorType);
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
   };
@@ -209,12 +210,7 @@ export default function Home(props) {
         />
       </Head>
       <div className="container">
-        <div
-          onMouseEnter={() => cursorChangeHandler('hovered')}
-          onMouseLeave={() => cursorChangeHandler('')}
-        >
-          <div css={titleStyle}>Xyz photography</div>{' '}
-        </div>
+        <div css={titleStyle}>Xyz photography</div>{' '}
       </div>
 
       {navbarOpen && (
@@ -290,14 +286,19 @@ export default function Home(props) {
                       <br />
                       for {preview.client}
                       <div css={infoDateStyle}>{preview.date}</div>
-                      <button
-                        onClick={() => {
-                          handleToggle();
-                          setImageNumber(preview.id);
-                        }}
+                      <div
+                        onMouseEnter={() => cursorChangeHandler('hovered')}
+                        onMouseLeave={() => cursorChangeHandler('')}
                       >
-                        have a look
-                      </button>
+                        <button
+                          onClick={() => {
+                            handleToggle();
+                            setImageNumber(preview.id);
+                          }}
+                        >
+                          have a look
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

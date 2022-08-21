@@ -4,6 +4,7 @@ import useMousePosition from '../pages/hooks/useMousePosition';
 
 const DotRing = () => {
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
+  console.log(cursorChangeHandler);
   const { x, y } = useMousePosition();
   return (
     <>
