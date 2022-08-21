@@ -107,7 +107,7 @@ export default function ImageCarousel(props) {
       </div> */}
       <div css={backgroundStyle}>
         <Image
-          src={`/image0${currentIndex + 1}.jpg`}
+          src={props.bigImageUrls[currentIndex + 1]}
           alt="background"
           objectFit="fill"
           layout="fill"
@@ -125,7 +125,7 @@ export default function ImageCarousel(props) {
             >
               <Image
                 onClick={prev}
-                src={`/image0${currentIndex}.jpg`}
+                src={props.imageUrls[currentIndex]}
                 width="250px"
                 height="330px"
                 alt="prev"
@@ -144,7 +144,7 @@ export default function ImageCarousel(props) {
               className="left-arrow"
             >
               <Image
-                src={`/image0${children.length}.jpg`}
+                src={props.imageUrls[children.length]}
                 width="250px"
                 height="330px"
                 alt="prev"
@@ -172,7 +172,7 @@ export default function ImageCarousel(props) {
             >
               <Image
                 onClick={next}
-                src={`/image0${currentIndex + 2}.jpg`}
+                src={props.imageUrls[currentIndex + 2]}
                 width="250px"
                 height="330px"
                 alt="next"
@@ -191,7 +191,7 @@ export default function ImageCarousel(props) {
               className="right-arrow"
             >
               <Image
-                src="/image01.jpg"
+                src={props.imageUrls[1]}
                 width="250px"
                 height="330px"
                 alt="next"

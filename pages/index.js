@@ -218,7 +218,7 @@ export default function Home(props) {
           <div>
             <Image
               onClick={handleToggle}
-              src={`/image0${imageNumber}.jpg`}
+              src={props.imageUrls[imageNumber]}
               alt="full screen view"
               width="512px"
               height="680"
@@ -231,6 +231,10 @@ export default function Home(props) {
         activeIndex={props.activeIndex}
         setActiveIndex={props.setActiveIndex}
         johannaInfos={props.johannaInfos}
+        imageIndex={props.imageIndex}
+        setImageIndex={props.setImageIndex}
+        imageUrls={props.imageUrls}
+        bigImageUrls={props.bigImageUrls}
       >
         {props.johannaInfos.map((preview) => {
           return (
@@ -239,7 +243,7 @@ export default function Home(props) {
                 <div className="item1">
                   <div css={picContainerStyle}>
                     <Image
-                      src={`/image0${preview.id}.jpg`}
+                      src={props.imageUrls[preview.id]}
                       alt={preview.title}
                       width={508}
                       height={678}

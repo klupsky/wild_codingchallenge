@@ -1,11 +1,55 @@
 import './index.css';
 import { css, Global } from '@emotion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DotRing from '../components/DotRing';
 import MouseContextProvider from '../util/context/mouse-context';
 
+const imageUrls = [
+  '',
+  '/image01.jpg',
+  '/image02.jpg',
+  '/image03.jpg',
+  '/image04.jpg',
+  '/image05.jpg',
+];
+
+const bigImageUrls = [
+  '',
+  '/image01@2x.jpg',
+  '/image02@2x.jpg',
+  '/image03@2x.jpg',
+  '/image04@2x.jpg',
+  '/image05@2x.jpg',
+];
+
+const preloadedImageUrls = new Set();
+
+function preloadImage(url) {
+  if (preloadedImageUrls.has(url)) return;
+  const img = new Image();
+  img.src = url;
+  preloadedImageUrls.add(url);
+}
+
+// Loop around to the beginning if at the end
+function getNextActiveIndex(activeIndex) {
+  const isLastActiveIndex = activeIndex === imageUrls.length - 1;
+  return isLastActiveIndex ? 0 : activeIndex + 1;
+}
+
 function MyApp({ Component, pageProps }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const nextImageUrl = imageUrls[getNextActiveIndex(activeIndex)];
+    const nextBigImageUrl = bigImageUrls[getNextActiveIndex(activeIndex)];
+
+    preloadImage(nextImageUrl);
+    preloadImage(nextBigImageUrl);
+
+    setLoading(false);
+  }, [activeIndex]);
 
   return (
     <MouseContextProvider>
@@ -50,7 +94,6 @@ function MyApp({ Component, pageProps }) {
             border: 1px solid white;
             border-radius: 100%;
             transform: translate(-50%, -50%);
-
             will-change: width, height, transform, border;
             z-index: 999;
             pointer-events: none;
@@ -86,12 +129,14 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-      <DotRing />
+      {loading ? <div>HELLO</div> : <DotRing />}
 
       <Component
         {...pageProps}
         activeIndex={activeIndex}
         setActiveIndex={setActiveIndex}
+        imageUrls={imageUrls}
+        bigImageUrls={bigImageUrls}
       />
     </MouseContextProvider>
   );
