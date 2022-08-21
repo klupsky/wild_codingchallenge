@@ -23,7 +23,6 @@ const bigImageUrls = [
 ];
 
 const preloadedImageUrls = new Set();
-
 function preloadImage(url) {
   if (preloadedImageUrls.has(url)) return;
   const img = new Image();
@@ -42,13 +41,19 @@ function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const nextImageUrl = imageUrls[getNextActiveIndex(activeIndex)];
-    const nextBigImageUrl = bigImageUrls[getNextActiveIndex(activeIndex)];
+    setTimeout(() => {
+      const nextImageUrl = imageUrls[getNextActiveIndex(activeIndex)];
+      preloadImage(nextImageUrl);
 
-    preloadImage(nextImageUrl);
-    preloadImage(nextBigImageUrl);
+      setLoading(false);
+    }, 100);
+  }, [activeIndex]);
 
-    setLoading(false);
+  useEffect(() => {
+    setTimeout(() => {
+      const nextBigImageUrl = bigImageUrls[getNextActiveIndex(activeIndex)];
+      preloadImage(nextBigImageUrl);
+    }, 100);
   }, [activeIndex]);
 
   return (

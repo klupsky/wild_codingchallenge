@@ -190,6 +190,7 @@ const fullScreen = css`
   z-index: 100;
   background-color: hsla(0, 100%, 0%, 0.8);
   padding: 10%;
+  opacity: 1;
 `;
 
 export default function Home(props) {
