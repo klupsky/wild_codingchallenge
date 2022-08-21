@@ -2,7 +2,7 @@ import './index.css';
 import { css, Global } from '@emotion/react';
 import { useState } from 'react';
 import DotRing from '../components/DotRing';
-import MouseContextProvider from './context/mouse-context';
+import MouseContextProvider from '../util/context/mouse-context';
 
 function MyApp({ Component, pageProps }) {
   const [activeIndex, setActiveIndex] = useState(0);

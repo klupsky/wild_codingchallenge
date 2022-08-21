@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useContext, useState } from 'react';
 import Dots from '../components/Dots';
 import ImageCarousel from '../components/ImageCarousel';
+import { MouseContext } from '../util/context/mouse-context';
 import { getJohannaHobel } from '../util/database';
-import { MouseContext } from './context/mouse-context';
 
 const titleStyle = css`
   position: absolute;

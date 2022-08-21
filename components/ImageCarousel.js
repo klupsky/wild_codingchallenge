@@ -112,8 +112,6 @@ export default function ImageCarousel(props) {
           objectFit="fill"
           layout="fill"
           quality={100}
-          width={100}
-          height={100}
         />
       </div>
       <div className="carousel-container">
