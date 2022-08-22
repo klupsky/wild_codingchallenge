@@ -193,6 +193,20 @@ const fullScreen = css`
   opacity: 1;
 `;
 
+const pageStyle = css`
+@keyframes fadeOut {
+    0% { opacity: 1 }
+    100% { opacity: 0,
+      display: none
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+`;
+
 export default function Home(props) {
   const [fullsizeOn, setFullsizeOn] = useState(false);
   const [imageNumber, setImageNumber] = useState('');
@@ -202,7 +216,7 @@ export default function Home(props) {
     setFullsizeOn(!fullsizeOn);
   };
   return (
-    <div>
+    <div css={pageStyle}>
       <Head>
         <title>xyz photography</title>
         <meta
@@ -210,8 +224,8 @@ export default function Home(props) {
           content="hypothetical homepage for a Styling and Photography collective"
         />
       </Head>
-      <div className="container">
-        <div css={titleStyle}>Xyz photography</div>{' '}
+      <div>
+        <div css={titleStyle}>Xyz photography</div>
       </div>
 
       {fullsizeOn && (

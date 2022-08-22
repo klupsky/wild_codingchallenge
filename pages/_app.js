@@ -35,6 +35,11 @@ function getNextActiveIndex(activeIndex) {
   const isLastActiveIndex = activeIndex === imageUrls.length - 1;
   return isLastActiveIndex ? 0 : activeIndex + 1;
 }
+// Loop around to the beginning if at the end
+function getNextActiveBigIndex(activeIndex) {
+  const isLastActiveIndex = activeIndex === bigImageUrls.length - 1;
+  return isLastActiveIndex ? 0 : activeIndex + 1;
+}
 
 function MyApp({ Component, pageProps }) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -51,7 +56,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     setTimeout(() => {
-      const nextBigImageUrl = bigImageUrls[getNextActiveIndex(activeIndex)];
+      const nextBigImageUrl = bigImageUrls[getNextActiveBigIndex(activeIndex)];
       preloadImage(nextBigImageUrl);
     }, 100);
   }, [activeIndex]);
@@ -80,6 +85,11 @@ function MyApp({ Component, pageProps }) {
             }
             a:hover {
               cursor: none;
+            }
+
+            h1 {
+              font-family: 'Tungsten-Semibold';
+              font-size: 18px;
             }
           }
 
