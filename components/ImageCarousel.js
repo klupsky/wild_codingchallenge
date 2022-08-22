@@ -99,12 +99,6 @@ export default function ImageCarousel(props) {
 
   return (
     <div css={carouselStyle}>
-      {/* <div>
-        {' '}
-        {props.johannaInfos.map((preview) => {
-          return <div key={`id-${preview.id}`}>{preview.id}</div>;
-        })}
-      </div> */}
       <div css={backgroundStyle}>
         <Image
           src={props.bigImageUrls[currentIndex + 1]}
@@ -116,46 +110,51 @@ export default function ImageCarousel(props) {
       </div>
       <div className="carousel-container">
         <div className="carousel-wrapper">
-          {currentIndex > 0 ? (
-            <button
-              onClick={() => {
-                props.setActiveIndex(currentIndex);
-              }}
-              className="left-arrow"
-            >
-              <Image
-                onClick={prev}
-                src={props.imageUrls[currentIndex]}
-                width="250px"
-                height="330px"
-                alt="prev"
-                css={css`
-                  border-radius: 10px;
-                  z-index: 1;
-                `}
-              />
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                props.setActiveIndex(0);
-                setCurrentIndex(children.length - 1);
-              }}
-              className="left-arrow"
-            >
-              <Image
-                src={props.imageUrls[children.length]}
-                width="250px"
-                height="330px"
-                alt="prev"
-                css={css`
-                  border-radius: 10px;
-                  z-index: 1;
-                `}
-              />
-            </button>
-          )}
-          <div className="carousel-content">
+          <div
+            onMouseEnter={() => props.cursorChangeHandler('hovered')}
+            onMouseLeave={() => props.cursorChangeHandler('')}
+          >
+            {currentIndex > 0 ? (
+              <button
+                onClick={() => {
+                  props.setActiveIndex(currentIndex);
+                }}
+                className="left-arrow"
+              >
+                <Image
+                  onClick={prev}
+                  src={props.imageUrls[currentIndex]}
+                  width="250px"
+                  height="330px"
+                  alt="prev"
+                  css={css`
+                    border-radius: 10px;
+                    z-index: 1;
+                  `}
+                />
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  props.setActiveIndex(0);
+                  setCurrentIndex(children.length - 1);
+                }}
+                className="left-arrow"
+              >
+                <Image
+                  src={props.imageUrls[children.length]}
+                  width="250px"
+                  height="330px"
+                  alt="prev"
+                  css={css`
+                    border-radius: 10px;
+                    z-index: 1;
+                  `}
+                />
+              </button>
+            )}
+          </div>
+          <div>
             <div
               className="carousel-content"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -163,45 +162,51 @@ export default function ImageCarousel(props) {
               {children}
             </div>
           </div>
-          {currentIndex < length - 1 ? (
-            <button
-              onClick={() => {
-                props.setActiveIndex(currentIndex + 1);
-              }}
-              className="right-arrow"
-            >
-              <Image
-                onClick={next}
-                src={props.imageUrls[currentIndex + 2]}
-                width="250px"
-                height="330px"
-                alt="next"
-                css={css`
-                  border-radius: 10px;
-                  z-index: 1;
-                `}
-              />
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                props.setActiveIndex(0);
-                setCurrentIndex(0);
-              }}
-              className="right-arrow"
-            >
-              <Image
-                src={props.imageUrls[1]}
-                width="250px"
-                height="330px"
-                alt="next"
-                css={css`
-                  border-radius: 10px;
-                  z-index: 1;
-                `}
-              />
-            </button>
-          )}
+
+          <div
+            onMouseEnter={() => props.cursorChangeHandler('hovered')}
+            onMouseLeave={() => props.cursorChangeHandler('')}
+          >
+            {currentIndex < length - 1 ? (
+              <button
+                onClick={() => {
+                  props.setActiveIndex(currentIndex + 1);
+                }}
+                className="right-arrow"
+              >
+                <Image
+                  onClick={next}
+                  src={props.imageUrls[currentIndex + 2]}
+                  width="250px"
+                  height="330px"
+                  alt="next"
+                  css={css`
+                    border-radius: 10px;
+                    z-index: 1;
+                  `}
+                />
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  props.setActiveIndex(0);
+                  setCurrentIndex(0);
+                }}
+                className="right-arrow"
+              >
+                <Image
+                  src={props.imageUrls[1]}
+                  width="250px"
+                  height="330px"
+                  alt="next"
+                  css={css`
+                    border-radius: 10px;
+                    z-index: 1;
+                  `}
+                />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

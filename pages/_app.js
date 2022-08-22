@@ -23,6 +23,7 @@ const bigImageUrls = [
 ];
 
 const preloadedImageUrls = new Set();
+
 function preloadImage(url) {
   if (preloadedImageUrls.has(url)) return;
   const img = new Image();
@@ -51,7 +52,7 @@ function MyApp({ Component, pageProps }) {
       preloadImage(nextImageUrl);
 
       setLoading(false);
-    }, 100);
+    }, 1000);
   }, [activeIndex]);
 
   useEffect(() => {
@@ -112,7 +113,21 @@ function MyApp({ Component, pageProps }) {
             will-change: width, height, transform, border;
             z-index: 999;
             pointer-events: none;
-            mix-blend-mode: soft-light;
+            opacity: 1;
+          }
+          .ringLoading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border: 1px solid white;
+            border-radius: 100%;
+            transform: translate(-50%, -50%);
+            will-change: width, height, transform, border;
+            z-index: 999;
+            pointer-events: none;
+            opacity: 0.5;
           }
 
           .dot {
@@ -126,17 +141,16 @@ function MyApp({ Component, pageProps }) {
             transform: translate(-50%, -50%);
             z-index: 999;
             pointer-events: none;
+            opacity: 1;
           }
 
           .ring.hovered {
             width: 55px;
             height: 55px;
             border: 1px solid white;
-            -webkit-transition-duration: 120ms;
             transition-duration: 120ms;
-            -webkit-transition-timing-function: ease-out;
+
             transition-timing-function: ease-out;
-            mix-blend-mode: hard-light;
           }
 
           .dot.hovered {
@@ -144,7 +158,7 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
-      {loading ? <div>HELLO</div> : <DotRing />}
+      <DotRing loading={loading} />
 
       <Component
         {...pageProps}

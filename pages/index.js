@@ -179,32 +179,56 @@ const infoDateStyle = css`
   margin-bottom: 1rem;
 `;
 
-const fullScreen = css`
-  display: grid;
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  align-content: center;
-  align-self: center;
-  text-align: center;
-  z-index: 100;
-  background-color: hsla(0, 100%, 0%, 0.8);
-  padding: 10%;
-  opacity: 1;
-`;
-
 const pageStyle = css`
-@keyframes fadeOut {
-    0% { opacity: 1 }
-    100% { opacity: 0,
-      display: none
-    }
-}
+  .no-content {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    z-index: 0;
+    display: none;
 
-@keyframes fadeIn {
-    0% { opacity: 0 }
-    100% { opacity: 1 }
-}
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+
+  .content {
+    opacity: 1;
+    animation: fadeIn 500ms linear;
+    /* animation: fadeOut 500ms linear;
+    animation-duration: 4s; */
+
+    display: grid;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    align-content: center;
+    align-self: center;
+    text-align: center;
+    z-index: 100;
+    background-color: hsla(0, 100%, 0%, 0.8);
+    padding: 10%;
+    opacity: 1;
+  }
 `;
 
 export default function Home(props) {
@@ -212,9 +236,11 @@ export default function Home(props) {
   const [imageNumber, setImageNumber] = useState('');
   const { cursorType, cursorChangeHandler } = useContext(MouseContext);
   console.log(cursorType);
+
   const handleToggle = () => {
     setFullsizeOn(!fullsizeOn);
   };
+
   return (
     <div css={pageStyle}>
       <Head>
@@ -228,19 +254,17 @@ export default function Home(props) {
         <div css={titleStyle}>Xyz photography</div>
       </div>
 
-      {fullsizeOn && (
-        <div css={fullScreen}>
-          <div>
-            <Image
-              onClick={handleToggle}
-              src={props.imageUrls[imageNumber]}
-              alt="full screen view"
-              width="512px"
-              height="680"
-            />
-          </div>
+      <div className={fullsizeOn ? 'content' : 'no-content'}>
+        <div>
+          <Image
+            onClick={handleToggle}
+            src={props.imageUrls[imageNumber]}
+            alt=""
+            width="512px"
+            height="680"
+          />
         </div>
-      )}
+      </div>
 
       <ImageCarousel
         activeIndex={props.activeIndex}
@@ -250,6 +274,8 @@ export default function Home(props) {
         setImageIndex={props.setImageIndex}
         imageUrls={props.imageUrls}
         bigImageUrls={props.bigImageUrls}
+        cursorType={cursorType}
+        cursorChangeHandler={cursorChangeHandler}
       >
         {props.johannaInfos.map((preview) => {
           return (
