@@ -117,7 +117,7 @@ export default function ImageCarousel(props) {
             {currentIndex > 0 ? (
               <button
                 onClick={() => {
-                  props.setActiveIndex(currentIndex);
+                  props.setActiveIndex(currentIndex - 1);
                 }}
                 className="left-arrow"
               >
@@ -136,7 +136,7 @@ export default function ImageCarousel(props) {
             ) : (
               <button
                 onClick={() => {
-                  props.setActiveIndex(0);
+                  props.setActiveIndex(children.length - 1);
                   setCurrentIndex(children.length - 1);
                 }}
                 className="left-arrow"
