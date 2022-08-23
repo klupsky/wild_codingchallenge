@@ -50,16 +50,13 @@ function MyApp({ Component, pageProps }) {
     setTimeout(() => {
       const nextImageUrl = imageUrls[getNextActiveIndex(activeIndex)];
       preloadImage(nextImageUrl);
-
       setLoading(false);
     }, 1000);
   }, [activeIndex]);
 
   useEffect(() => {
-    setTimeout(() => {
-      const nextBigImageUrl = bigImageUrls[getNextActiveBigIndex(activeIndex)];
-      preloadImage(nextBigImageUrl);
-    }, 100);
+    const nextBigImageUrl = bigImageUrls[getNextActiveBigIndex(activeIndex)];
+    preloadImage(nextBigImageUrl);
   }, [activeIndex]);
 
   return (
