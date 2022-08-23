@@ -115,19 +115,32 @@ function MyApp({ Component, pageProps }) {
             pointer-events: none;
             opacity: 1;
           }
+
           .ringLoading {
             position: fixed;
-            top: 0;
-            left: 0;
             width: 40px;
             height: 40px;
-            border: 1px solid white;
+            border: 1px solid hsla(0, 100%, 0%, 0.8);
             border-radius: 100%;
             transform: translate(-50%, -50%);
             will-change: width, height, transform, border;
             z-index: 999;
             pointer-events: none;
-            opacity: 0.5;
+            animation: 1.5s linear infinite spinner;
+            animation-play-state: inherit;
+            border-bottom-color: white;
+            content: '';
+            transform: translate3d(-50%, -50%, 0);
+            will-change: transform;
+          }
+
+          @keyframes spinner {
+            0% {
+              transform: translate3d(-50%, -50%, 0) rotate(0deg);
+            }
+            100% {
+              transform: translate3d(-50%, -50%, 0) rotate(360deg);
+            }
           }
 
           .dot {
@@ -158,6 +171,7 @@ function MyApp({ Component, pageProps }) {
           }
         `}
       />
+      <div className="spin"></div>
       <DotRing loading={loading} />
 
       <Component
